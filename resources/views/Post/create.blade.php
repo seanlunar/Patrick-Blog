@@ -15,12 +15,16 @@
                                 <div class="alert alert-danger">{{ $error }}</div>
                             @endforeach
                         @endif
-                            <form style="padding: 28px;" action="{{ route('allpost') }}" method="Post">
+                            <form style="padding: 28px;" action="{{ route('allpost') }}" method="Post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                   <label for="text">Title:</label>
                                   <input type="text" class="form-control" name="title" id="text">
                                 </div>
+                                <div class="form-group">
+                                    <label for="text">Photo:</label>
+                                    <input type="file" class="form-control" name="image" id="text">
+                                  </div>
                                 <div class="form-group">
                                   <label for="pwd">Body:</label>
                                   <textarea class="form-control" name="body" id="summernote" cols="30" rows="10"></textarea>

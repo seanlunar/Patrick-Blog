@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -13,8 +14,15 @@ class PostController extends Controller
      */
     public function index()
     {
+        // Carbon::now();
         $posts = Post::all();
         return view('Post.index', compact('posts'));
+    }
+
+    public function indexone()
+    {
+        $posts = Post::orderBy('created_at', 'desc')->get();
+        return view('welcome', compact('posts'));
     }
 
     /**
@@ -30,10 +38,21 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        // dd($request->all());
+        $post = new Post();
 
-        // $post = Post::create($request->all());
-        Post::create($this->validateRequest());
+            if($request->hasFile('image')){
+                $request->validate([
+                    'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:5048',
+                ]);
+                $imageName = time().'.'.$request->image->extension();
+                $request->image->move(public_path('images'), $imageName);
+                $post->image = $imageName;
+            }
+
+                $post->title = $request->title;
+                $post->body = $request->body;
+                $post->save();
+        // Post::create($this->validateRequest());
         return redirect()->route('allpost');
     }
 
@@ -59,10 +78,19 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
         // return $post;
-        // $post ->title = $request->title;
-        // $post ->body = $request->body;
-        // $post->save();
-        $post->update($this->validateRequest());
+        if($request->hasFile('image')){
+            $request->validate([
+                'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            ]);
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $post->image = $imageName;
+        }
+
+        $post ->title = $request->title;
+        $post ->body = $request->body;
+        $post->save();
+        // $post->update($this->validateRequest());
 
         return to_route('showpost', $post->slug);
         // return $post->update($this->validateRequest());
@@ -83,7 +111,6 @@ class PostController extends Controller
         return request()->validate([
             'title' => 'required',
             'body' => 'required',
-
         ]);
     }
 }
