@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use App\Models\Post;
-use Carbon\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PostController extends Controller
 {
@@ -53,6 +54,8 @@ class PostController extends Controller
                 $post->body = $request->body;
                 $post->save();
         // Post::create($this->validateRequest());
+        Alert::toast('Successfully added a post ', 'success');
+
         return redirect()->route('allpost');
     }
 
@@ -91,6 +94,7 @@ class PostController extends Controller
         $post ->body = $request->body;
         $post->save();
         // $post->update($this->validateRequest());
+        Alert::toast('Successfully updated a post ', 'success');
 
         return to_route('showpost', $post->slug);
         // return $post->update($this->validateRequest());
