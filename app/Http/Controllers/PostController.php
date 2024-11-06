@@ -58,7 +58,14 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        // return $post;
+        // $post ->title = $request->title;
+        // $post ->body = $request->body;
+        // $post->save();
+        $post->update($this->validateRequest());
+
+        return to_route('showpost', $post->slug);
+        // return $post->update($this->validateRequest());
     }
 
     /**
@@ -71,7 +78,7 @@ class PostController extends Controller
         return redirect()->route('allpost');
     }
 
-     
+
     private function validateRequest(){
         return request()->validate([
             'title' => 'required',

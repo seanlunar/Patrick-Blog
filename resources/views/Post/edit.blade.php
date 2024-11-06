@@ -15,7 +15,8 @@
                                 <div class="alert alert-danger">{{ $error }}</div>
                             @endforeach
                         @endif
-                            <form style="padding: 28px;" action="{" method="Post">
+                            <form style="padding: 28px;" action="{{ route('updatepost', $post)  }}" method="Post">
+                                @method('PUT')
                                 @csrf
                                 <div class="form-group">
                                   <label for="text">Title:</label>
@@ -23,12 +24,16 @@
                                 </div>
                                 <div class="form-group">
                                   <label for="pwd">Body:</label>
-                                  <textarea class="form-control" name="body" id="" cols="30" rows="10">
-                                    {!! $post->body  !!} 
+                                  <textarea class="form-control" name="body" id="summernote" cols="30" rows="10">
+                                    {!! $post->body  !!}
                                   </textarea>
                                 </div>
 
-                                <button type="submit" class="btn btn-default">Update {{ $post->title }}</button>
+                                <p>
+
+                                </p>
+
+                                <button style="width: 100%" type="submit" class="btn btn-primary">Update {{ $post->title }}</button>
                               </form>
                         </div>
                     </div>
