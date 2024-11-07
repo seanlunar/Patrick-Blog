@@ -67,6 +67,13 @@ class PostController extends Controller
         return view('Post.show', compact('post'));
     }
 
+    public function View(Post $post)
+    {
+        // dd($post->id);
+        $posts = Post::where('id', '<>', $post->id)->take(10)->get();
+        return view('view', compact('post','posts'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

@@ -177,98 +177,61 @@
 
 
 
+@extends('layouts.public')
+@section('data')
+<div class="wrapper">
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Bloggy - Personal Blog Template</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Free Website Template" name="keywords">
-        <meta content="Free Website Template" name="description">
+    <div class="">
 
-        <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
-
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:300;400;600;700;800&display=swap" rel="stylesheet">
-
-        <!-- Font Awesome -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="{{ asset('style.css') }}" rel="stylesheet">
-    </head>
-
-<body>
-    <div class="wrapper">
-
-        <div class="">
-
-            <div class="container px-2 py-5 bg-primary">
-                <div class="px-4 py-5 row">
-                    <div class="text-center col-sm-12 text-md-left">
-                        <h1 class="mb-3 text-white mb-md-0 text-uppercase font-weight-bold">My Blog</h1>
-                    </div>
-                   <p>
+        <div class="container px-2 py-5 bg-primary">
+            <div class="px-4 py-5 row">
+                <div class="text-center col-sm-12 text-md-left">
+                    <h1 class="mb-3 text-white mb-md-0 text-uppercase font-weight-bold">My Blog</h1>
+                </div>
+                <p>
                     description
-                   </p>
-                </div>
-            </div>
-            <!-- Page Header End -->
-
-
-                <!-- Blog List Start -->
-                <div class="container pt-5 bg-white">
-                    @foreach ($posts as $post)
-                    <div class="px-3 pb-5 row blog-item">
-                        <div class="col-md-5">
-                            <img class="mb-4 img-fluid mb-md-0" src="{{ asset('images/' . $post->image ) }}" alt="Image">
-                        </div>
-                        <div class="col-md-7">
-                            <h3 class="py-2 mb-2 bg-white mt-md-4 px-md-3 font-weight-bold">{{ $post->title }}</h3>
-                            <div class="mb-3 d-flex">
-                                <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i>  {{ \Carbon\Carbon::parse($post->created_at)->format('jS F Y')  }}</small>
-                                {{-- <small class="mr-2 text-muted"><i class="fa fa-folder"></i> Web Design</small>
-                                <small class="mr-2 text-muted"><i class="fa fa-comments"></i> 15 Comments</small> --}}
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu suscipit orci velit id libero
-                            </p>
-                            <a class="p-0 btn btn-link" href="">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-
-                    @endforeach
-
-                </div>
-                <!-- Blog List End -->
-
-
-                <!-- Footer Start -->
-                <div class="container py-4 text-center bg-secondary">
-                    <p class="m-0 text-white">
-                        &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved. Designed by <a class="text-white font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>
-                    </p>
-                </div>
-                <!-- Footer End -->
+                </p>
             </div>
         </div>
+        <!-- Page Header End -->
 
-        <!-- Back to Top -->
-        <a href="#" class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
+        <!-- Blog List Start -->
+        <div class="container pt-5 bg-white">
+            @foreach ($posts as $post)
+                <div class="px-3 pb-5 row blog-item">
+                    <div class="col-md-5">
+                        <img class="mb-4 img-fluid mb-md-0" src="{{ asset('images/' . $post->image) }}" alt="Image">
+                    </div>
+                    <div class="col-md-7">
+                        <h3 class="py-2 mb-2 bg-white mt-md-4 px-md-3 font-weight-bold">{{ $post->title }}</h3>
+                        <div class="mb-3 d-flex">
+                            <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i>
+                                {{ \Carbon\Carbon::parse($post->created_at)->format('jS F Y') }}</small>
+                            {{-- <small class="mr-2 text-muted"><i class="fa fa-folder"></i> Web Design</small>
+                                <small class="mr-2 text-muted"><i class="fa fa-comments"></i> 15 Comments</small> --}}
+                        </div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu suscipit orci velit id
+                            libero
+                        </p>
+                        <a class="p-0 btn btn-link" href="{{ route('viewpost', $post) }}">Read More <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+            @endforeach
 
-        <!-- Contact Javascript File -->
-        <script src="mail/jqBootstrapValidation.min.js"></script>
-        <script src="mail/contact.js"></script>
+        </div>
+        <!-- Blog List End -->
 
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
-    </body>
-</html>
+
+        <!-- Footer Start -->
+        <div class="container py-4 text-center bg-secondary">
+            <p class="m-0 text-white">
+                &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved.
+                Designed by <a class="text-white font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>
+            </p>
+        </div>
+        <!-- Footer End -->
+    </div>
+</div>
+@endsection
