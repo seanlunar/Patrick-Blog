@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $role = Role::Create(['name' => 'superadmin',]);
-        $role = Role::Create(['name' => 'admin',]);
+        $role1 = Role::Create(['name' => 'superadmin',]);
+        $role2 = Role::Create(['name' => 'admin',]);
         $role = Role::Create(['name' => 'user',]);
 
 
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
            'password' => bcrypt('password'),
         ]);
 
-        $user->assignRole($role);
+        $user->assignRole($role2);
 //         // User::factory(10)->create();
 
 //         User::factory()->create([

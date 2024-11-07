@@ -188,9 +188,16 @@
                 <div class="text-center col-sm-12 text-md-left">
                     <h1 class="mb-3 text-white mb-md-0 text-uppercase font-weight-bold">My Blog</h1>
                 </div>
-                <p>
-                    description
-                </p>
+               @guest
+               <a href="{{ route('createaccount') }}">
+                <button class="btn btn-info btn-lg">Create User Account</button>
+            </a>
+               @endguest
+               @auth
+               <a href="{{ route('createstory') }}">
+                <button class="btn btn-info btn-lg">Add Story</button>
+            </a>
+               @endauth
             </div>
         </div>
         <!-- Page Header End -->

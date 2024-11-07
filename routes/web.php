@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PrivateController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -20,8 +21,17 @@ Route::middleware([
 });
 
 
+Route::get('dashboard',[PrivateController::class, 'index'])->name('dashboard');
+Route::get('user-add',[PostController::class, 'createStory'])->name('createstory');
+
+//saveuser
+Route::post('save-uset',[PrivateController::class, 'addUser'])->name('addUser');
+
+
+Route::view('create-account', 'createaccount')->name('createaccount');
 Route::get('all-post',[PostController::class, 'index'])->name('allpost');
 Route::post('all-post',[PostController::class, 'store'])->name('allpost');
+
 
 Route::get('create-post',[PostController::class, 'create'])->name('createpost');
 Route::get('single-post/{post}',[PostController::class, 'show'])->name('showpost');

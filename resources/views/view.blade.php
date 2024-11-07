@@ -18,7 +18,7 @@
                     <div class="col-lg-8">
                         <img class="mb-4 img-fluid mb-md-0" src="{{ asset('images/' . $post->image) }}" alt="Image">
                         <p>
-                          Posted on :   {{ \Carbon\Carbon::parse($post->created_at)->format('jS F Y') }}
+                          Posted on :   {{ \Carbon\Carbon::parse($post->created_at)->format('jS F Y') }} | Posted by : {{ $post->userro->name }}
                         </p>
 
                         <p style="width: 100%">

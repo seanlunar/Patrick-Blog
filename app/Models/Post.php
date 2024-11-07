@@ -23,4 +23,9 @@ class Post extends Model
     {
         return 'slug';
     }
+
+    public function userro()
+    {
+        return $this->belongsTo(User::class, 'user');
+    }
 }

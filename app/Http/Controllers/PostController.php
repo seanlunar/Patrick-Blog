@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -52,11 +53,23 @@ class PostController extends Controller
 
                 $post->title = $request->title;
                 $post->body = $request->body;
+                $post->user = Auth::user()->id;
                 $post->save();
         // Post::create($this->validateRequest());
         Alert::toast('Successfully added a post ', 'success');
 
-        return redirect()->route('allpost');
+
+        if (Auth::user()->hasRole(['admin', 'superadmin'])) {
+            return redirect()->route('allpost');
+        }
+
+        return redirect()->route('welcome');
+
+    }
+
+
+    public function createStory(){
+        return view('createstory');
     }
 
     /**
